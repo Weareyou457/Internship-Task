@@ -37,29 +37,6 @@ app.get("/",(req,res)=>{
     res.send("hello")
 })
 
-const Customer = require('./modals/customer');
-
-
-app.post('/Admin/customer/post', async (req, res) => {
-    try {
-      const { name, email, mobileNumber, city } = req.body;
-      const customer = new Customer({ name, email, mobileNumber, city });
-      await customer.save();
-      res.status(201).json(customer);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-  
-  // Get all customers
-  app.get('/Admin/customer/get', async (req, res) => {
-    try {
-      const customers = await Customer.find();
-      res.json(customers);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
 
 app.listen(8080,()=>{
     console.log("app is Runnig on Port 8080")
