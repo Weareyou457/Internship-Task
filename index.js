@@ -19,6 +19,7 @@ const userRouter=require("./routes/user")
 const customerRouter=require("./routes/customer")
 const purchaseRouter=require("./routes/purchase")
 const shippingRouter=require("./routes/shipping")
+
 dotenv.config()
 
 mongoose.connect('mongodb+srv://alfaizmalwa567:q2J9mhYPo1qqWy8a@cluster0.vdwbfxd.mongodb.net/customer?retryWrites=true&w=majority', {
