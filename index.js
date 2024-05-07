@@ -33,6 +33,9 @@ app.use("/Admin/customer",customerRouter )
 app.use("/Admin/purchase", purchaseRouter)
 app.use("/Admin/shipping", shippingRouter)
 
+app.use("/",(req,res)=>{
+    res.send("hello")
+})
 
 app.listen(8080,()=>{
     console.log("app is Runnig on Port 8080")
