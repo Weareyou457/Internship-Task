@@ -6,7 +6,22 @@ const morgan=require("morgan")
 const bodyParser = require("body-parser")
 const cors = require('cors')
 
-mongoose.connect('mongodb+srv://alfaizmalwa567:q2J9mhYPo1qqWy8a@cluster0.vdwbfxd.mongodb.net/customer?retryWrites=true&w=majority', {
+app.use(helmet());
+app.use(morgan("common"));
+app.use(bodyParser.json());  //for api Express.js, you need to include middleware like body-parser to parse incoming request bodies. 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors())
+
+
+
+const dotenv = require("dotenv")
+const userRouter=require("./routes/user")
+const customerRouter=require("./routes/customer")
+const purchaseRouter=require("./routes/purchase")
+const shippingRouter=require("./routes/shipping")
+dotenv.config()
+
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -15,17 +30,6 @@ mongoose.connect('mongodb+srv://alfaizmalwa567:q2J9mhYPo1qqWy8a@cluster0.vdwbfxd
     console.error("Error connecting to MongoDB:", error);
 });
 
-
-const userRouter=require("./routes/user")
-const customerRouter=require("./routes/customer")
-const purchaseRouter=require("./routes/purchase")
-const shippingRouter=require("./routes/shipping")
-
-app.use(helmet());
-app.use(morgan("common"));
-app.use(bodyParser.json());  //for api Express.js, you need to include middleware like body-parser to parse incoming request bodies. 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors())
 
 
 app.use("/Admin/user", userRouter)
