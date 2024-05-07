@@ -5,7 +5,7 @@ const router = express.Router();
 const Customer = require('../modals/customer');
 
 // Create a new customer
-router.post('/customers', async (req, res) => {
+router.post('/post', async (req, res) => {
   try {
     const { name, email, mobileNumber, city } = req.body;
     const customer = new Customer({ name, email, mobileNumber, city });
@@ -17,7 +17,7 @@ router.post('/customers', async (req, res) => {
 });
 
 // Get all customers
-router.get('/customers', async (req, res) => {
+router.get('/get', async (req, res) => {
   try {
     const customers = await Customer.find();
     res.json(customers);
@@ -27,7 +27,7 @@ router.get('/customers', async (req, res) => {
 });
 
 // Get customer by ID
-router.get('/customers/:id', async (req, res) => {
+router.get('/get/:id', async (req, res) => {
   try {
     const customer = await Customer.findById(req.params.id);
     if (!customer) {
@@ -40,7 +40,7 @@ router.get('/customers/:id', async (req, res) => {
 });
 
 // Update customer by ID
-router.put('/customers/:id', async (req, res) => {
+router.put('/put/:id', async (req, res) => {
   try {
     
     const customer = await Customer.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body });
@@ -54,7 +54,7 @@ router.put('/customers/:id', async (req, res) => {
 });
 
 // Delete customer by ID
-router.delete('/customers/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
   try {
     const customer = await Customer.findByIdAndDelete(req.params.id);
     if (!customer) {
