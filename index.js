@@ -6,9 +6,15 @@ const morgan=require("morgan")
 const bodyParser = require("body-parser")
 const cors = require('cors')
 
-mongoose.connect(`mongodb+srv://alfaizmalwa567:q2J9mhYPo1qqWy8a@cluster0.vdwbfxd.mongodb.net/customer?retryWrites=true&w=majority`).then(() => {
-    console.log("mongodb Database Connect connected")
-})
+mongoose.connect('mongodb+srv://alfaizmalwa567:q2J9mhYPo1qqWy8a@cluster0.vdwbfxd.mongodb.net/customer?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log("mongodb Database Connected");
+}).catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+});
+
 
 const userRouter=require("./routes/user")
 const customerRouter=require("./routes/customer")
